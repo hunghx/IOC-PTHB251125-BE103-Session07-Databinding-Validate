@@ -1,4 +1,4 @@
-package re.api.model;
+package re.api.dto;
 
 public enum Sex {
     FEMALE,
