@@ -26,6 +26,13 @@ public class StudentServiceImpl implements IStudentService{
     public StudentResponse addStudent(StudentAdd request) {
         // Biến từ dto request -> entity
         Student entity = StudentMapper.mapToEntity(request);
+        // check ràng buộc trong db
+        if (studentRepository.existsByEmail(request.getEmail())){
+            throw  new RuntimeException("Email already exists");
+        }
+        if (studentRepository.existsByPhone(request.getPhone())){
+            throw  new RuntimeException("Phone already exists");
+        }
         // luuw
         entity = studentRepository.save(entity);
         // BIến đổi từ entity -> response

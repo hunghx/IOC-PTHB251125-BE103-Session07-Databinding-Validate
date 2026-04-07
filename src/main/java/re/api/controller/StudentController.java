@@ -48,8 +48,12 @@ public class StudentController {
             });
             return ResponseEntity.badRequest().body(errors); // 400
         }
+        try {
 
-        return new  ResponseEntity<>(studentService.addStudent(request), HttpStatus.CREATED); // 201
+            return new ResponseEntity<>(studentService.addStudent(request), HttpStatus.CREATED); // 201}
+        }catch (RuntimeException e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT); // 409 : Conflict
+        }
     }
     // Cập nhật
     // Xóa

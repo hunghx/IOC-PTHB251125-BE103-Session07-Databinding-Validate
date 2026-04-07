@@ -1,12 +1,10 @@
 package re.api.dto.request;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import re.api.dto.Sex;
+import re.api.validation.CheckLength;
 
 import java.time.LocalDate;
 @Getter@Setter
@@ -14,14 +12,17 @@ public class StudentAdd {
     @NotNull
     // độ dài ID phải đủ 10 k tự, bắt buộc bắt đầu bằng SV và 8 kí tự số
     @Pattern(regexp ="^SV[0-9]{8}$")
-
+//    @NegativeOrZero
+//    private int age;
     private String id;
-    @NotBlank(message = "Không để trống")
+//    @NotBlank(message = "Không để trống")
+    @CheckLength
     private String name;
     @NotNull
     @Email
     private String email;
     @NotNull
+//    @Past
     private LocalDate dateOfBirth;
     private String address;
     @NotNull
