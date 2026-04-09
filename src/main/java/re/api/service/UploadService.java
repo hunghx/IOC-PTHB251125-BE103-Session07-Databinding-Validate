@@ -2,7 +2,7 @@ package re.api.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,9 +10,10 @@ import java.io.IOException;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class UploadService {
-    @Autowired
-    private Cloudinary cloudinary;
+
+    private final Cloudinary cloudinary;
     public String uploadFile(MultipartFile file) throws IOException {
         try {
             // Sử dụng phương thức upload để gửi file lên Cloudinary
@@ -34,4 +35,5 @@ public class UploadService {
             throw new IOException("Could not upload file to Cloudinary", e);
         }
     }
+
 }

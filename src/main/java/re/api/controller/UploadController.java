@@ -31,5 +31,7 @@ public class UploadController {
         // up lên cloud
         String url = uploadService.uploadFile(file);
         return ResponseEntity.ok().body("Upload thanh công "+ url);
+
+        // Upload nhiều file và trả về 1 danh sách đường dẫn truy cập
     }
 }
