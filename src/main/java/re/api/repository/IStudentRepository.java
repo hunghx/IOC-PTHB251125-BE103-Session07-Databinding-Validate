@@ -7,4 +7,6 @@ import re.api.entity.Student;
 public interface IStudentRepository extends JpaRepository<Student, String> {
     boolean existsByEmail(String email);
     boolean existsByPhone(String phone);
+
+    boolean existsByClasses_Id(Long id);
 }

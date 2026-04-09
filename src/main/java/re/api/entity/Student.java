@@ -1,8 +1,6 @@
 package re.api.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,4 +24,7 @@ public class Student {
     private String phone;
     private Sex sex;
     private boolean isActive; // trạng thái tài khoản
+    @ManyToOne
+    @JoinColumn(name="class_id")
+    private Classes classes;
 }

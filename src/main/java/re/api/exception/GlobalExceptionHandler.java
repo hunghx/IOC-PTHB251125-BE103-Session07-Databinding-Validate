@@ -31,6 +31,12 @@ public class GlobalExceptionHandler {
         errors.put("id", e.getMessage());
         return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND); // 404
     }
+    @ExceptionHandler(ForeignKeyException.class)
+    public ResponseEntity<?> handlerForeignKeyException(ForeignKeyException e){
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error", e.getMessage());
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST); // 400
+    }
 
     // Lưu ý ve thứ tự khai báo ngoại lệ cần xử lý : từ phạm vi bé đến lớn
 }
