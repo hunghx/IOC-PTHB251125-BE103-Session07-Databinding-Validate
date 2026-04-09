@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import re.api.dto.request.StudentAdd;
 import re.api.dto.response.StudentResponse;
 import re.api.entity.Student;
+import re.api.exception.ResourceNotFoundException;
 import re.api.service.IStudentService;
 
 import java.util.HashMap;
@@ -39,22 +40,30 @@ public class StudentController {
     // Thêm mới
     @PostMapping
     // Để kích hoạt cơ chế validate chúng ta sử dụng @Valid
-    public ResponseEntity<?> addStudent(@Valid @RequestBody StudentAdd request, BindingResult result) {
-        if (result.hasErrors()){
-            // nếu có lỗi thì làm gì
-            Map<String, String> errors = new HashMap<>(); // danh sách lỗi
-            result.getFieldErrors().forEach(err->{
-                errors.put(err.getField(), err.getDefaultMessage());
-            });
-            return ResponseEntity.badRequest().body(errors); // 400
-        }
-        try {
+    public ResponseEntity<?> addStudent(@Valid @RequestBody StudentAdd request) {
+//        if (result.hasErrors()){
+//            // nếu có lỗi thì làm gì
+//            Map<String, String> errors = new HashMap<>(); // danh sách lỗi
+//            result.getFieldErrors().forEach(err->{
+//                errors.put(err.getField(), err.getDefaultMessage());
+//            });
+//            return ResponseEntity.badRequest().body(errors); // 400
+//        }
+//        try {
 
             return new ResponseEntity<>(studentService.addStudent(request), HttpStatus.CREATED); // 201}
-        }catch (RuntimeException e){
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT); // 409 : Conflict
-        }
+//        }catch (RuntimeException e){
+//            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT); // 409 : Conflict
+//        }
     }
     // Cập nhật
+    @PostMapping("/{id}")
+    public ResponseEntity<?> updateStudent(@Valid @RequestBody StudentAdd request) throws ResourceNotFoundException{
+//        return new ResponseEntity<>(studentService.addStudent(request), HttpStatus.CREATED); // 201}
+            throw new ResourceNotFoundException("id ko tồn tại"); // viết ở service
+//        }catch (RuntimeException e){
+//            return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT); // 409 : Conflict
+//        }
+    }
     // Xóa
 }
